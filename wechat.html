@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link rel="stylesheet" type="text/css" href="wechat.css">
+	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="wechat.js"></script>
+</head>
+<body>
+	<div class="wechat">
+		<div class="left">
+			<div class="list">
+				<div class="menu">
+					<ul class="main_ul">
+						<li class="main">
+							<a href="javascript:;">添加菜单</a>
+						</li>
+					</ul>
+					<div class="submenu">
+						<ul class="submenu_first">
+							<li class="head_li"><span></span></li>
+						</ul>
+						<ul class="submenu_second">
+							<li class="head_li"><span></span></li>
+						</ul>
+						<ul class="submenu_third">
+							<li class="head_li"><span></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="common">
+				<div class="head">
+					<span>菜单名称</span>
+					<a href="javascript:;">删除菜单</a>
+				</div>
+				<div class="content">
+					<form action="">
+						<table>
+							<tr>
+								<td>菜单名称</td>
+								<td>
+									<input type="text" value="菜单名称" name="text" class="list_name">
+									<p>字数不超过4个汉字或8个字母</p>
+								</td>
+							</tr>
+							<tr>
+								<td>菜单内容</td>
+								<td>
+									<ul class="input">
+										<li><span class="mess"></span>发送消息</li>
+										<li><span></span>跳转网页</li>
+										<li><span></span>跳转小程序</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="bottom">
+			<div class="bottom_left">
+				<button class="sort">菜单排序</button>
+			</div>
+			<div class="bottom_right">
+				<button class="save">保存并发布</button>
+				<button class="preview">预览</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

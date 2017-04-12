@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
+		.con{
+			width: 800px;
+			height: 400px;
+			position: relative;
+			overflow: hidden;
+		}
+		.con ul{
+			position: absolute;
+		}
+		.con ul li{
+			width: 800px;
+			height: 400px;
+			float: left;
+		}
+		.con ul li img{
+			width: 800px;
+			height: 400px;
+		}
+		.left{
+			position: absolute;
+			top: 50%;
+			left: 20px;
+			z-index: 99;
+		}
+		.right{
+			position: absolute;
+			top: 50%;
+			right: 20px;
+			z-index: 99;
+		}
+		/*.con ol{
+			position: absolute;
+			bottom: 50px;
+			z-index: 9999;
+		}*/
+		.con ol{width: 100px;height: 12px;position: absolute;bottom: 20px;left:45%;z-index: 2;}
+		.con ol li{width: 15px;height: 15px;display: block;border-radius: 50%;margin-right: 5px;background: #000;float: left;cursor: pointer;}
+		.con ol li.active{background: red;}
+	</style>
+</head>
+<body>
+	<div class="con">
+		<ul>
+			<li><img src="images/banner.jpg"   alt=""></li>
+			<li><img src="images/banner_2.jpg" alt=""></li>
+			<li><img src="images/banner_3.jpg" alt=""></li>
+			<li><img src="images/banner.jpg" alt=""></li>
+		</ul>
+		<a class="left" href="javascript:;"><img src="images/detaikl_prev.png" alt=""></a>
+		<a class="right" href="javascript:;"><img src="images/detaikl_next.png" alt=""></a>
+		<ol>
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+		</ol>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript">
+		var Lwin=$(".con ul li").width();
+		var Llet=$(".con ul li").length;
+		var i=0;
+		$(".con ol li").click(function(){
+			i=$(this).index();
+			$(".con ul").animate({left:"-"+Lwin*i+"px"});
+		})
+		$(".con ul").css({width:Lwin*Llet+"px"})
+		$(".right").click(function(){
+			i++;
+			if(i>3){
+				$(".con ul").css({left:"0px"}).stop().animate({left:"-"+Lwin+"px"})
+				i=1;
+			}else{
+				$(".con ul").stop().animate({left:"-"+Lwin*i+"px"})
+			}
+			btn();
+		})
+		$(".left").click(function(){
+			i--;
+			if(i<0){
+				$(".con ul").css({left:"-"+Lwin*3+"px"}).stop().animate({left:"-"+Lwin*2+"px"})
+				i=2;
+			}else{
+				$(".con ul").stop().animate({left:"-"+i*Lwin+"px"})
+			}
+			btn();
+		})
+		// for(var i=0;i<Lwin;i++){
+		// 	$("ol li").click(function(){
+		// 		btn();
+		// 	})
+		// }
+		$("ol li").on("mouseover",function(){
+			$("ol li").eq($(this).index()).addClass("active").siblings().removeClass("active");
+		}
+	</script>
+</body>
+</html>

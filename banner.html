@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>banner</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#box{width: 500px;height: 300px;position: relative;margin: 0 auto; overflow: hidden; }
+		#box #banner{height: 300px;position: absolute;left: 0px;}
+		#box #banner img{display: block;float: left;width: 500px;height: 300px;}
+		#box #banner .show{display: block;}
+		#box #banner .hide{display: none;}
+		#icon{width: 100px;height: 12px;position: absolute;bottom: 20px;left:45%;z-index: 2;}
+		#icon li{width: 15px;height: 15px;display: block;border-radius: 50%;margin-right: 5px;background: #000;float: left;cursor: pointer;}
+		#icon li.active{background: red;}
+		#box .btn{width: 500px;height: 300px;}
+		#box .btn div{width: 250px;height: 300px;display: block;float: left;position: relative;}
+		#box .btn span{width: 32px;height: 32px;display: none;}
+		#left{background: url(left.png) no-repeat;cursor: pointer;position: absolute;top: 50%;left: 20px;}
+		#right{background: url(right.png) no-repeat;position: absolute;top: 50%;right: 20px;cursor: pointer;}
+	</style>
+	<script type="text/javascript" src="jquery-3.2.0.min.js"></script>
+</head>
+<body>
+	<div id="box">
+		<div id="banner">
+			<img src="slide.jpg" alt="">
+			<img src="slide1.jpg" alt="">
+			<img src="slide3.jpg" alt="">
+			<img src="slide4.jpg" alt="">
+		</div>
+		<ul id="icon">
+			<li index="0" class="active"></li>
+			<li index="1"></li>
+			<li index="2"></li>
+			<li index="3"></li>
+		</ul>
+		<div class="btn">
+			<div id="left_div"><span id="left"></span></div>
+			<div id="right_div"><span id="right"></span></div>
+		</div>
+	</div>
+</body>
+<script>
+	$(function(){
+		var wid = $("#banner img").width();
+		var len = $("#icon li").length;
+		var n = 0;
+		$("li").mouseover(function(){
+			$("li").eq($(this).index()).addClass("active").siblings().removeClass("active");
+			$("#banner").stop(true,true).animate({left:"-"+wid*$(this).index()+"px"},500);
+		});
+		$("#left_div").mouseover(function(){
+			$("#left").css("display","block")
+		}).mouseout(function(){
+			$("#left").css("display","none");
+		})
+		$("#right_div").mouseover(function(){
+			$("#right").css("display","block")
+		}).mouseout(function(){
+			$("#right").css("display","none");
+		})
+		$("#banner").css({width:wid*len+"px"});
+		$("#left").click(function(){
+			n--;
+			if(n<0){
+				$("#banner").css({left:"-"+wid*3+"px"}).stop(true,true).animate({left:"-"+wid*3+"px"},500);
+				n=3;
+			}else{
+				$("#banner").stop(true,true).animate({left:"-"+n*wid+"px"},500);
+			}
+			btn();
+		})
+		$("#right").click(function(){
+			n++;
+			if(n>3){
+				$("#banner").css({left:"0px"}).stop(true,true).animate({left:"0px"},500);
+				n=0;
+			}else{
+				$("#banner").stop(true,true).animate({left:"-"+n*wid+"px"},500);
+			}
+			btn();
+		})
+		for(var i=0;i<wid;i++){
+			$("li").mouseover(function(){
+				var num = $("li").eq($(this).index()).attr("index");
+				n = num;
+				btn();
+			})
+		}
+		function btn(){
+			$("li").eq(n).addClass("active").siblings().removeClass("active");
+		}
+		var $timer;
+		function play(){
+			$timer = setInterval(function(){
+				$("#right").trigger("click");
+			},2000);
+		}
+		$("#box").mouseover(function(){
+			clearInterval($timer);
+		}).mouseout(function(){
+			clearInterval($timer);
+			play();
+		})
+		play();
+	})
+</script>
+</html>

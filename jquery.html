@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
+		.con{
+			width: 800px;
+			height: 400px;
+			position: relative;
+			overflow: hidden;
+		}
+		.con ul{
+			position: absolute;
+
+		}
+		.con ul li{
+			float: left;
+		}
+		.con ul li img{
+			width: 800px;
+			height: 400px;
+		}
+		.left{
+			position: absolute;
+			top:50%;
+			left: 20px;
+			z-index: 999;
+		}
+		.right{
+			position: absolute;
+			top:50%;
+			right: 20px;
+			z-index: 999;
+		}
+		.con ol{
+			width: 100px;
+			height: 10px;
+			position: absolute;
+			bottom: 10px;
+			left: 350px;
+		}
+		.con ol li{
+			float: left;
+			margin-right: 10px;
+			cursor: pointer;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: #000;
+		}
+		.con ol li.oli{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="con">
+		<ul>
+			<li><img src="images/slide.jpg" alt=""></li>
+			<li><img src="images/slide1.jpg" alt=""></li>
+			<li><img src="images/slide3.jpg" alt=""></li>
+			<li><img src="images/slide.jpg" alt=""></li>
+		</ul>
+		<a href="javascript:;" class="left"><img src="images/detaikl_prev.png" alt=""></a>
+		<a href="javascript:;" class="right"><img src="images/detaikl_next.png" alt=""></a>
+		<ol>
+			<li class="oli"></li>
+			<li></li>
+			<li></li>
+		</ol>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript">
+		var Lwin=$(".con ul li").width();
+		var Llet=$(".con ul li").length;
+		var i=0;
+		$(".con ol li").mouseover(function(){
+			i=$(this).index();
+			$(".con ul").stop().animate({left:"-"+i*Lwin+"px"})
+			$(this).addClass("oli").siblings().removeClass("oli")
+		})
+		$(".con ul").css({width:Lwin*Llet+"px"});
+		$(".left").click(function(){
+			i--;
+			if(i<0){
+				$(".con ul").css({left:"-"+Lwin*3+"px"}).stop().animate({left:"-"+Lwin*2+"px"},1000);
+				i=2;
+			}else{
+				$(".con ul").stop().animate({left:"-"+i*Lwin+"px"},1000)
+			}	
+		})
+		$(".right").click(function(){
+			i++;
+			if(i>3){
+				$(".con ul").css({left:"0px"}).stop().animate({left:"-"+Lwin+"px"},1000);	
+				i=1;
+			}else{
+				$(".con ul").stop().animate({left:"-"+i*Lwin+"px"},1000)
+			}
+			
+		})
+		
+	</script>
+</body>
+</html>
